@@ -5,8 +5,6 @@ import { logout } from "../actions/auth";
 import Dashboard from "./Dashboard";
 import { MdComputer } from "react-icons/md";
 const Navbar = () => {
-
-
   const [showUserBoard, setShowshowUserBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const { user: currentUser } = useSelector((state) => state.auth);

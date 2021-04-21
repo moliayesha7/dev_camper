@@ -157,7 +157,7 @@ const AddBootcamp = () => {
     (currentUser === null ?
       <Redirect to="/login" /> :
       <div className="col-md-12 addBootcamp">
-     {/* <p>{currentUser.token}</p> */}
+    
         <div className="w-80">
           <h5 className="card-title">Add Bootcamp</h5>
           <p className="card-text">Important : You must be affiliated with a bootcamp to add to DevCamper</p>
@@ -169,7 +169,7 @@ const AddBootcamp = () => {
                   <div className="card-body">
                     <h5 className="card-title">Location & Contact</h5>
                     <p className="card-text">If multiple locatio use the main or largest</p>
-                    {/* {!successful && ( */}
+                   
 
                     <div className="form-group">
                       <label htmlFor="name">Name</label>
@@ -231,7 +231,7 @@ const AddBootcamp = () => {
                         validations={[required]}
                       />
                     </div>
-                    {/* )} */}
+                
                   </div>
                 </div>
 

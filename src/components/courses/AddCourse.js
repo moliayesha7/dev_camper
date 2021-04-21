@@ -1,9 +1,10 @@
 import React, { useState, useRef, useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { Redirect } from 'react-router-dom';
+import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Checkbox = ({ fnClick, fnChange, title = "", checked = false }) => (
   <label>
@@ -32,21 +33,17 @@ const required = (value) => {
 };
 
 
-const AddCourse = () => {
+const AddCourse = (props) => {
   const form = useRef();
   const checkBtn = useRef();
   const [title, setTitle] = useState("");
   const [weeks, setWeeks] = useState("");
-  const [selectedSkill, setSelectedSkill] = useState("");
   const [tuition, setTuition] = useState("");
   const [scholarhipsAvailable, setScholarhipsAvailable] = useState("");
   const [description, setDescription] = useState("");
   const { user: currentUser } = useSelector((state) => state.auth);
-  const [role, setRole] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
   const [successful, setSuccessful] = useState(false);
   const { message } = useSelector(state => state.message);
-  const dispatch = useDispatch();
   const [addSkillType, setAddSkillType] = useState(["Beginner (Any)", "Mid Level", "Top"]);
   const Add = addSkillType.map(Add => Add)
 
@@ -58,6 +55,10 @@ const AddCourse = () => {
   };
   const reducer = (state, action) => ({ ...state, ...action });
   const [state, setState] = useReducer(reducer, initialState);
+
+
+  const local_location = props.location.pathname;
+  const id = local_location.split('/')[2];
 
   const onChangeTitle = (e) => {
     const title = e.target.value;
@@ -84,7 +85,7 @@ const AddCourse = () => {
     setTuition(tuition);
   };
 
-  const url = "http://115.127.8.84:8080/api/v1/bootcamps/5feb0bd17391141ae880f15a/courses";
+  const url = `http://115.127.8.84:8080/api/v1/bootcamps/${id}/courses`;
   const handleSubmit = (event) => {
     event.preventDefault();
     const confirmData = {
@@ -96,7 +97,7 @@ const AddCourse = () => {
       "scholarhipsAvailable": state.click
     };
     console.log(confirmData);
-    fetch("", {
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
